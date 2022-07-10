@@ -1,16 +1,23 @@
 <template>
   <div id='app'>
-    <home />
+    <el-container>
+      <el-header height='70px'>
+        <layout-header />
+      </el-header>
+      <layout-body />
+    </el-container>
   </div>
 </template>
 <script>
 
-import home from '@/view/Home'
+import layoutHeader from '@/components/layout/layout-header'
+import layoutBody from '@/components/layout/layout-body'
 
 export default {
   name: 'App',
   components: {
-    home
+    layoutHeader,
+    layoutBody
   }
 }
 </script>
@@ -25,5 +32,13 @@ html, body {
   height: 100%;
 }
 
+.el-container {
+  height: 100%;
+}
+
+.el-header {
+  border-bottom: #2ecc71 2px solid;
+
+}
 
 </style>

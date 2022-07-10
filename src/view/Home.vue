@@ -1,10 +1,12 @@
 <!-- home -->
 <template>
   <el-container>
-    <el-header height='70px'>
-      <layout-header />
-    </el-header>
-    <layout-body />
+    <el-aside width='150px'>
+      <aside-menu />
+    </el-aside>
+    <el-main>
+      <router-view></router-view>
+    </el-main>
   </el-container>
 </template>
 
@@ -12,14 +14,12 @@
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
 
-import layoutHeader from '@/components/layout/layout-header'
-import layoutBody from '@/components/layout/layout-body'
+import asideMenu from '@/components/aside-menu'
 
 export default {
   //import引入的组件需要注入到对象中才能使用
   components: {
-    layoutHeader,
-    layoutBody
+    asideMenu
   },
   data() {
     //这里存放数据
@@ -36,11 +36,11 @@ export default {
 </script>
 <style scoped>
 .el-container {
-  height: 100%;
+  display: flex;
+  flex: 1;
 }
 
-.el-header {
-  border-bottom: #2ecc71 2px solid;
-
+.el-main {
+  background-color: #f4f4f4;
 }
 </style>

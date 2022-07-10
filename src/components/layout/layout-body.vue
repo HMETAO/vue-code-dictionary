@@ -1,26 +1,16 @@
 <!-- body -->
 <template>
-  <el-container>
-    <el-aside width='150px'>
-      <aside-menu/>
-    </el-aside>
-    <el-main>
-      <router-view></router-view>
-    </el-main>
-  </el-container>
+  <router-view></router-view>
 </template>
 
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import asideMenu from '@/components/aside-menu'
 
 export default {
   name: 'layout-body',
   //import引入的组件需要注入到对象中才能使用
-  components: {
-    asideMenu
-  },
+  components: {},
   data() {
     //这里存放数据
     return {}
@@ -54,12 +44,5 @@ export default {
 }
 </script>
 <style scoped>
-.el-container {
-  display: flex;
-  flex: 1;
-}
 
-.el-main {
-  background-color: #f4f4f4;
-}
 </style>

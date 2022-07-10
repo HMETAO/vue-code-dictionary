@@ -3,6 +3,7 @@
     router
     text-color='#2d3436'
     unique-opened
+    :default-active='active'
     active-text-color='#0984e3'>
     <div v-for='(menu,index) in menus' :key='index'>
       <el-submenu v-if='menu.children.length > 0' :index='index+""'>
@@ -11,14 +12,15 @@
           <span>{{ menu.menusName }}</span>
         </template>
         <el-menu-item-group>
-          <el-menu-item v-for='(children,index) in menu.children' :key='index' :index='children.path'>
+          <el-menu-item v-for='(children,index) in menu.children' :key='index'
+                        :index='children.path'>
             {{ children.menusName }}
           </el-menu-item>
         </el-menu-item-group>
       </el-submenu>
-      <el-menu-item v-else :index='menu.path'>
+      <el-menu-item :index='menu.path'>
         <i class='el-icon-coordinate'></i>
-        <span slot='title'>{{ menu.menusName }}</span>
+        <span>{{ menu.menusName }}</span>
       </el-menu-item>
     </div>
   </el-menu>
@@ -31,6 +33,7 @@ export default {
   name: 'aside-menu',
   data() {
     return {
+      active: '',
       menus: {}
     }
   },
@@ -39,11 +42,11 @@ export default {
       getMenus()
         .then(res => {
           this.menus = res.data
-          console.log(this.menus)
         })
     }
   },
   created() {
+    this.active = this.$route.path.split('/')[1]
     this.getMenus()
   }
 
