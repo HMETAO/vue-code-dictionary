@@ -10,8 +10,8 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 })
-router.beforeEach((to, from, next) => {
-  next()
-})
-router.afterEach((to, from) => {})
+// router.beforeEach((to, from, next) => {
+//   next()
+// })
+// router.afterEach((to, from) => {})
 export default router

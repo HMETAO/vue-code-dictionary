@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import {
+  Drawer,
   Pagination,
   Dialog,
   Autocomplete,
@@ -81,6 +82,7 @@ import {
 } from 'element-ui'
 
 Vue.use(Avatar)
+Vue.use(Drawer)
 Vue.use(Pagination)
 Vue.use(Dialog)
 Vue.use(Autocomplete)
