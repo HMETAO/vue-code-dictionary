@@ -5,8 +5,8 @@
       <div class='web-title'>Code Dictionary</div>
     </div>
     <div class='header-user-center'>
-      <el-avatar size='18px'
-                 src='http://tpocketbook.hmetao.cn/TPocketBook/avatar/c569fb7de0cc4e4089bf7c8bc3127b41.jpg'>
+      <el-avatar
+        src='http://tpocketbook.hmetao.cn/TPocketBook/avatar/c569fb7de0cc4e4089bf7c8bc3127b41.jpg'>
       </el-avatar>
       <el-menu mode='horizontal' active-text-color='#0984e3'>
         <el-menu-item index='2'>首页</el-menu-item>

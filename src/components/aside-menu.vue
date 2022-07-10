@@ -1,27 +1,52 @@
 <template>
   <el-menu
-    default-active='2'
     router
     text-color='#2d3436'
+    unique-opened
     active-text-color='#0984e3'>
-    <el-menu-item index='2'>
-      <i class='el-icon-menu'></i>
-      <span slot='title'>片段</span>
-    </el-menu-item>
-    <el-menu-item index='3'>
-      <i class='el-icon-document'></i>
-      <span slot='title'>插件</span>
-    </el-menu-item>
-    <el-menu-item index='4'>
-      <i class='el-icon-setting'></i>
-      <span slot='title'>多样</span>
-    </el-menu-item>
+    <div v-for='(menu,index) in menus' :key='index'>
+      <el-submenu v-if='menu.children.length > 0' :index='index+""'>
+        <template slot='title'>
+          <i class='el-icon-menu'></i>
+          <span>{{ menu.menusName }}</span>
+        </template>
+        <el-menu-item-group>
+          <el-menu-item v-for='(children,index) in menu.children' :key='index' :index='children.path'>
+            {{ children.menusName }}
+          </el-menu-item>
+        </el-menu-item-group>
+      </el-submenu>
+      <el-menu-item v-else :index='menu.path'>
+        <i class='el-icon-coordinate'></i>
+        <span slot='title'>{{ menu.menusName }}</span>
+      </el-menu-item>
+    </div>
   </el-menu>
 </template>
 
 <script>
+import { getMenus } from '@/api/menus'
+
 export default {
-  name: 'aside-menu'
+  name: 'aside-menu',
+  data() {
+    return {
+      menus: {}
+    }
+  },
+  methods: {
+    getMenus() {
+      getMenus()
+        .then(res => {
+          this.menus = res.data
+          console.log(this.menus)
+        })
+    }
+  },
+  created() {
+    this.getMenus()
+  }
+
 }
 </script>
 
@@ -29,8 +54,23 @@ export default {
 .el-menu {
   height: 100%;
 
-  .el-menu-item span {
-    font-size: 10px;
+
+  div {
+    .el-submenu {
+      .el-menu-item-group {
+        /deep/ .el-menu-item-group__title {
+          padding: 0;
+        }
+      }
+
+      span {
+        font-size: 10px;
+      }
+    }
+
+    .el-menu-item {
+      font-size: 10px;
+    }
   }
 }
 

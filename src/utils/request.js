@@ -4,7 +4,7 @@ import axios from 'axios'
 // create an axios instance
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
-  timeout: 5000, // request timeout
+  timeout: 5000 // request timeout
 })
 
 // request interceptor
@@ -37,8 +37,8 @@ service.interceptors.response.use(
     // store.commit('SET_LOADING',false);
 
     // if the custom code is not 20000, it is judged as an error.
-    if (res.code !== 20000) {
-      return Promise.reject(new Error(res.msg || 'Error'))
+    if (res.code !== 200) {
+      return Promise.reject(new Error(res.message || 'Error'))
     } else {
       return res
     }
