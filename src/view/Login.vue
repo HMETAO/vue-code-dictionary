@@ -68,7 +68,10 @@ export default {
         if (valid) {
           login(this.loginForm).then(res => {
             // 存储用户信息
-            window.localStorage.setItem('userInfo', res.data)
+            window.localStorage.setItem('userInfo', JSON.stringify(res.data))
+            window.localStorage.setItem('isLogin', 'true')
+            // 触发登录事件
+            this.$bus.$emit('loginStateEvent')
             // 跳转home
             this.$router.push({ name: 'home' })
           }).catch(err => {
