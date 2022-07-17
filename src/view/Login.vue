@@ -11,6 +11,7 @@
         class='login-form'
         :model='loginForm'
         ref='loginFormRef'
+        :rules='loginFormRules'
       >
         <!-- 用户名 -->
         <el-form-item prop='username'>
@@ -40,11 +41,52 @@
 </template>
 
 <script>
+import { login } from '@/api/user'
+
 export default {
   name: 'Login',
   data() {
     return {
-      loginForm: {}
+      loginForm: {
+        username: 'HMETAO',
+        password: '123456'
+      },
+      loginFormRules: {
+        username: [
+          { required: true, message: '请输入用户名', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' }
+        ]
+      }
+    }
+  },
+  methods: {
+    login() {
+      // 校验表单
+      this.$refs['loginFormRef'].validate((valid) => {
+        if (valid) {
+          login(this.loginForm).then(res => {
+            // 存储用户信息
+            window.localStorage.setItem('userInfo', res.data)
+            // 跳转home
+            this.$router.push({ name: 'home' })
+          }).catch(err => {
+            this.$message.error(err)
+          })
+        } else {
+          this.$message({
+            type: 'warning',
+            message: '请根据要求填写登录表单！'
+          })
+          return false
+        }
+      })
+
+    },
+    resetLoginForm() {
+      // 刷新表单
+      this.$refs.loginFormRef.resetFields()
     }
   }
 }
