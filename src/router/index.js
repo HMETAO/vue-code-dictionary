@@ -19,9 +19,9 @@ const routes = [
     redirect: '/snippet',
     component: () => import('@/view/Home'),
     children: [
-      { path: '/snippet', component: () => import ('@/components/snippet') },
-      { path: '/plug', component: () => import ('@/components/snippet') },
-      { path: '/other', component: () => import ('@/components/snippet') }
+      { path: '/snippet', component: () => import ('@/components/snippet'), meta: { title: '片段' } },
+      { path: '/plug', component: () => import ('@/components/snippet'), meta: { title: '插件' } },
+      { path: '/other', component: () => import ('@/components/snippet'), meta: { title: '其他' } }
     ],
     meta: { title: '首页' }
   }

@@ -67,7 +67,6 @@ export default {
   },
   created() {
     this.init()
-    console.log(this.isLogin)
   },
   destroyed() {
     this.$bus.$off('loginStateEvent')
