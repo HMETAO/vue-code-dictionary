@@ -81,14 +81,14 @@ export default {
       }
     },
     logout() {
-      logout().then(() => {
-        // 清除状态
-        window.localStorage.clear()
-        this.userInfo = {}
-        this.isLogin = false
-        // 跳转登录页
-        this.$router.push({ name: 'login' })
-      })
+      // 调用接口
+      logout()
+      // 清除状态
+      window.localStorage.clear()
+      this.userInfo = {}
+      this.isLogin = false
+      // 跳转登录页
+      this.$router.push({ name: 'login' })
     },
     loginStateEventFunction() {
       this.init()

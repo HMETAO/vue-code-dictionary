@@ -22,10 +22,8 @@ export default {
 }
 </script>
 
-<style>
-html, body {
-  height: 100%;
-}
+<style scoped lang='less'>
+
 
 #app {
   width: 100%;
@@ -34,11 +32,10 @@ html, body {
 
 .el-container {
   height: 100%;
-}
 
-.el-header {
-  border-bottom: #2ecc71 2px solid;
-
+  .el-header {
+    border-bottom: #2ecc71 2px solid;
+  }
 }
 
 </style>

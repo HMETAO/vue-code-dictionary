@@ -1,8 +1,8 @@
 import request from '@/utils/request'
-//
-// export function getCategories() {
-//   return request({
-//     url: '/api/v1/category',
-//     method: 'get'
-//   })
-// }
+
+export function getCategoryMenus() {
+  return request({
+    url: '/api/v1/category/menus',
+    method: 'get'
+  })
+}
