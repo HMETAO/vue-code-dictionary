@@ -45,7 +45,7 @@ export default {
 
 <style scoped lang='less'>
 .el-tree {
-  font-size: 14px;
+  font-size: 15px;
 
   .custom-tree-node {
     span {

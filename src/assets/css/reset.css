@@ -18,32 +18,39 @@ time, mark, audio, video {
     font: inherit;
     vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
     display: block;
 }
+
 body {
     line-height: 1;
     overflow-x: hidden;
 }
+
 ol, ul {
     list-style: none;
 }
+
 blockquote, q {
     quotes: none;
 }
+
 blockquote:before, blockquote:after,
 q:before, q:after {
     content: '';
     content: none;
 }
+
 table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
 /*包含以下四种的链接*/
-a,a:link,a:visited,a:hover,a:active {
+a, a:link, a:visited, a:hover, a:active {
     text-decoration: none;
     color: unset;
 }
@@ -52,3 +59,10 @@ html, body {
     height: 100%;
 }
 
+.sidebar-wrapper .el-scrollbar__wrap {
+    overflow-x: hidden;
+}
+
+.is-horizontal {
+    display: none;
+}
