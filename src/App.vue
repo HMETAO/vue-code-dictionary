@@ -1,10 +1,10 @@
 <template>
   <div id='app'>
-    <el-container>
+    <el-container class="container">
       <el-header height='70px'>
         <layout-header />
       </el-header>
-      <layout-body />
+      <layout-body class="content"/>
     </el-container>
   </div>
 </template>
@@ -30,8 +30,13 @@ export default {
   height: 100%;
 }
 
-.el-container {
+.container {
   height: 100%;
+
+  .content {
+    flex: 1;
+    overflow: auto;
+  }
 
   .el-header {
     border-bottom: #2ecc71 2px solid;
