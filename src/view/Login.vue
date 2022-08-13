@@ -42,6 +42,7 @@
 
 <script>
 import { login } from '@/api/user'
+import { LOGIN_STATE_EVENT } from '@/constants/eventConstants'
 
 export default {
   name: 'Login',
@@ -71,7 +72,7 @@ export default {
             window.localStorage.setItem('userInfo', JSON.stringify(res.data))
             window.localStorage.setItem('isLogin', 'true')
             // 触发登录事件
-            this.$bus.$emit('loginStateEvent')
+            this.$bus.$emit(LOGIN_STATE_EVENT)
             // 跳转home
             this.$router.push({ name: 'home' })
           }).catch(err => {

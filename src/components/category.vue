@@ -4,6 +4,7 @@
     accordion
     highlight-current
     node-key='id'
+    @node-click='nodeClickEventFunction'
     ref='tree'>
     <span class='custom-tree-node' slot-scope='{ node,data }'>
       <el-tag v-if='data.snippet' class='el-icon-tickets' size='small' effect='plain'>
@@ -18,6 +19,8 @@
 
 <script>
 import { getCategoryMenus } from '@/api/category'
+import { getSnippet } from '@/api/snippet'
+import { SNIPPET_GET_EVENT } from '@/constants/eventConstants'
 
 export default {
   name: 'category',
@@ -35,8 +38,19 @@ export default {
       getCategoryMenus()
         .then(res => {
           this.categories = res.data
-          console.log(res)
         })
+    },
+    nodeClickEventFunction(data) {
+      // 判断是否为snippet
+      if (data.snippet) {
+        // 调用请求查询具体code
+        getSnippet(data.id.replaceAll('sn-', ''))
+          .then(res => {
+            this.$bus.$emit(SNIPPET_GET_EVENT, res.data.snippet)
+          }).catch(() => {
+          this.$bus.$emit(SNIPPET_GET_EVENT, '请正确选择snippet')
+        })
+      }
     }
 
   }

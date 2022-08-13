@@ -50,6 +50,7 @@
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
 import { logout } from '@/api/user'
+import { LOGIN_STATE_EVENT } from '@/constants/eventConstants'
 
 export default {
   name: 'layout-header',
@@ -63,13 +64,13 @@ export default {
     }
   },
   mounted() {
-    this.$bus.$on('loginStateEvent', this.loginStateEventFunction)
+    this.$bus.$on(LOGIN_STATE_EVENT, this.loginStateEventFunction)
   },
   created() {
     this.init()
   },
   destroyed() {
-    this.$bus.$off('loginStateEvent')
+    this.$bus.$off(LOGIN_STATE_EVENT)
   },
   //方法集合
   methods: {

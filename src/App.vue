@@ -1,10 +1,10 @@
 <template>
   <div id='app'>
-    <el-container class="container">
+    <el-container class='container'>
       <el-header height='70px'>
         <layout-header />
       </el-header>
-      <layout-body class="content"/>
+      <layout-body class='content' />
     </el-container>
   </div>
 </template>
