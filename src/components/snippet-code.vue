@@ -1,6 +1,11 @@
 <template>
   <div class='box'>
-    <prism-editor :tabSize='4' class='my-editor' v-model='code' :highlight='highlighter' line-numbers></prism-editor>
+    <prism-editor :tabSize='4'
+                  @blur='editorBlur'
+                  class='my-editor'
+                  v-model='code.snippet'
+                  :highlight='highlighter'
+                  line-numbers></prism-editor>
   </div>
 </template>
 
@@ -22,21 +27,31 @@ export default {
     PrismEditor
   },
   data() {
-    return { code: '⭐⭐⭐⭐请在左侧选择展示的snippet⭐⭐⭐⭐' }
+    return {
+      code: {
+        snippet: '⭐⭐⭐⭐请在左侧选择展示的snippet⭐⭐⭐⭐'
+      }
+    }
   },
   mounted() {
-    this.$bus.$on(SNIPPET_GET_EVENT, this.highlighter)
+    this.$bus.$on(SNIPPET_GET_EVENT, this.snippetGetCallback)
   },
-
   destroyed() {
     this.$bus.$off(SNIPPET_GET_EVENT)
-
   },
 
   methods: {
-    highlighter(code) {
+    // 获取到snippet的回调
+    snippetGetCallback(code) {
       this.code = code
-      return highlight(code, languages.js) // languages.<insert language> to return html with markup
+    },
+    // 高亮方法
+    highlighter(snippet) {
+      return highlight(snippet, languages.js) // languages.<insert language> to return html with markup
+    },
+    editorBlur() {
+      console.log(this.code)
+      // 更新操作
     }
   }
 }
@@ -53,7 +68,7 @@ export default {
 /* required class */
 .my-editor {
   /* we dont use `language-` classes anymore so thats why we need to add background and text color manually */
-  background: #2d2d2d;
+  background: #3d3d3d;
   color: #ccc;
   width: 100%;
   /* you must provide font-family font-size line-height. Example: */
