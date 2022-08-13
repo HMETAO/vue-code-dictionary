@@ -2,10 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import './assets/css/reset.css'
-// import './plugins/element.js'
+import './assets/css/globel.css'
 import 'element-ui/lib/theme-chalk/index.css'
-import Element from 'element-ui';
-Vue.use(Element);
+import Element from 'element-ui'
+
+Vue.use(Element)
 
 Vue.config.productionTip = false
 

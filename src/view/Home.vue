@@ -34,13 +34,14 @@ export default {
 
 }
 </script>
-<style scoped>
+<style scoped lang='less'>
 .el-container {
-  display: flex;
-  flex: 1;
-}
+  height: 100%;
 
-.el-main {
-  background-color: #f4f4f4;
+  .el-main {
+    height: 100%;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
 }
 </style>

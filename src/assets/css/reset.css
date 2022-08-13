@@ -59,10 +59,6 @@ html, body {
     height: 100%;
 }
 
-.sidebar-wrapper .el-scrollbar__wrap {
-    overflow-x: hidden;
-}
-
-.is-horizontal {
-    display: none;
+.view-max-height {
+    max-height: calc(100% - 70px);
 }
