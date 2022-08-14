@@ -1,8 +1,9 @@
 import request from '@/utils/request'
 
-export function getCategoryMenus() {
+export function getCategoryMenus(data) {
   return request({
     url: '/api/v1/category/menus',
-    method: 'get'
+    method: 'get',
+    params: data
   })
 }

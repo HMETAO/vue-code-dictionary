@@ -4,7 +4,6 @@
       <category />
     </div>
     <div class='snippet-code'>
-      <div class='snippet-expand'></div>
       <snippet-code />
     </div>
   </div>
@@ -42,13 +41,6 @@ export default {
   .snippet-code {
     flex: 1;
     display: flex;
-    flex-direction: column;
-
-    .snippet-expand {
-      width: 100%;
-      height: 30px;
-      background-color: #4d4d4d;
-    }
   }
 }
 

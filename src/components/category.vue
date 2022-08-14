@@ -2,7 +2,7 @@
   <div class='category-box'>
     <!--搜索部分-->
     <div class='snippet-category-search'>
-      <el-input placeholder='请输入内容' size='small' v-model='categorySearch' prefix-icon='el-icon-search'></el-input>
+      <el-input placeholder='搜索菜单内容' size='small' v-model='categorySearch' prefix-icon='el-icon-search'></el-input>
     </div>
     <!--树形部分-->
     <el-tree
