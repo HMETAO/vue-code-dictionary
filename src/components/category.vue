@@ -14,12 +14,26 @@
       :filter-node-method='filterNode'
       ref='tree'>
     <span class='custom-tree-node' slot-scope='{ node,data }'>
-      <el-tag v-if='data.snippet' class='el-icon-tickets' size='small' effect='plain'>
+        <div class='tree-site'>
+          <el-tag v-if='data.snippet' class='el-icon-tickets' size='small' effect='plain'>
         <span>{{ node.label }}</span>
-      </el-tag>
-      <i class='el-icon-folder' v-else>
-        <span>{{ node.label }}</span>
-      </i>
+        </el-tag>
+        <i class='el-icon-folder' v-else>
+          <span>{{ node.label }}</span>
+        </i>
+        </div>
+      <span class='tree-btn'>
+          <el-button
+            type='text'
+            size='mini'>
+            新增
+          </el-button>
+          <el-button
+            type='text'
+            size='mini'>
+            删除
+          </el-button>
+        </span>
       </span>
     </el-tree>
   </div>
@@ -85,13 +99,26 @@ export default {
   height: 100%;
 
   .el-tree {
-    font-size: 15px;
+    font-size: 14px;
     color: #7d7d7d;
     flex: 1;
 
     .custom-tree-node {
+      .tree-site {
+        display: flex;
+        align-items: center;
+      }
+
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+
       span {
         margin-left: 5px;
+      }
+
+      .tree-btn {
+        margin-right: 5px;
       }
     }
   }

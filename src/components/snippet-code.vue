@@ -21,7 +21,7 @@
                   :highlight='highlighter'
                   line-numbers></prism-editor>
 
-
+    <!-- todo 封装为一个component-->
     <!--Drawer-->
     <el-drawer
       title='添加Snippet'
