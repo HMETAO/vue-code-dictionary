@@ -7,3 +7,11 @@ export function getCategoryMenus(data) {
     params: data
   })
 }
+
+export function insertCategory(data) {
+  return request({
+    url: '/api/v1/category',
+    method: 'post',
+    data: data
+  })
+}
