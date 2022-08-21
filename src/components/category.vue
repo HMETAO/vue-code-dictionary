@@ -7,7 +7,6 @@
     <!--树形部分-->
     <el-tree
       :data='categoryMenus'
-      accordion
       highlight-current
       node-key='id'
       @node-click='nodeClickEventFunction'
@@ -31,6 +30,7 @@
               </el-button>
               <el-button
                 type='text'
+                @click='categoryDeleteEventFunction(data)'
                 size='mini'>
                 删除
               </el-button>
@@ -44,7 +44,7 @@
       title='添加category'
       :visible.sync='categoryInsertDialogVisible'
       width='25%'>
-      <el-form :model='categoryInsertForm' class='snippet-drawer-box-form'>
+      <el-form :model='categoryInsertForm' class='snippet-drawer-box-form' ref='categoryInsertFormRef'>
         <el-form-item label='分组名：' :label-width='formLabelWidth'>
           <el-input v-model='categoryInsertForm.name' placeholder='请输入分组名称'></el-input>
         </el-form-item>
@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { getCategoryMenus, insertCategory } from '@/api/category'
+import { getCategoryMenus, insertCategory, deleteCategory } from '@/api/category'
 import { getSnippet } from '@/api/snippet'
 import { SNIPPET_GET_EVENT } from '@/constants/eventConstants'
 
@@ -101,6 +101,30 @@ export default {
     init() {
       this.getCategoryMenus()
       this.getCategory()
+    },
+    // 删除分组事件回调
+    categoryDeleteEventFunction(data) {
+      this.$confirm('此操作将永久删除 "' + data.label + '" ,该分组下Snippet转移至通用分组, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        deleteCategory(data.id)
+          .then(() => {
+            this.$message({
+              type: 'success',
+              message: '删除成功!'
+            })
+            // 刷新category菜单
+            this.getCategoryMenus()
+          })
+          .catch((err) => {
+            this.$message({
+              type: 'error',
+              message: '删除失败：' + err
+            })
+          })
+      })
     },
     // 获取分类列表（包括snippet）
     getCategoryMenus() {
@@ -154,6 +178,7 @@ export default {
             type: 'success'
           })
         })
+      this.$refs['categoryInsertFormRef'].resetFields()
     }
   }
 }

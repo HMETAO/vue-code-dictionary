@@ -15,3 +15,10 @@ export function insertCategory(data) {
     data: data
   })
 }
+
+export function deleteCategory(id) {
+  return request({
+    url: '/api/v1/category/' + id,
+    method: 'delete'
+  })
+}
