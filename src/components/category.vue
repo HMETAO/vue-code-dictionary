@@ -43,19 +43,20 @@
     <el-dialog
       title='添加category'
       :visible.sync='categoryInsertDialogVisible'
+      @close='categoryInsertDialogCloseEventFunction'
       width='25%'>
       <el-form :model='categoryInsertForm' class='snippet-drawer-box-form' ref='categoryInsertFormRef'>
-        <el-form-item label='分组名：' :label-width='formLabelWidth'>
+        <el-form-item label='分组名：' :label-width='formLabelWidth' prop='name'>
           <el-input v-model='categoryInsertForm.name' placeholder='请输入分组名称'></el-input>
         </el-form-item>
-        <el-form-item label='父分组：' :label-width='formLabelWidth'>
+        <el-form-item label='父分组：' :label-width='formLabelWidth' prop='parentId'>
           <el-cascader v-model='categoryInsertForm.parentId' :options='category'
                        :props='categoryProps'></el-cascader>
         </el-form-item>
       </el-form>
       <span slot='footer' class='dialog-footer'>
-        <el-button @click='categoryInsertDialogVisible = false'>取 消</el-button>
         <el-button type='primary' @click='categoryInsertEventFunction'>确 定</el-button>
+        <el-button @click='categoryInsertDialogVisible = false'>取 消</el-button>
       </span>
     </el-dialog>
   </div>
@@ -101,6 +102,9 @@ export default {
     init() {
       this.getCategoryMenus()
       this.getCategory()
+    },
+    categoryInsertDialogCloseEventFunction() {
+      this.$refs['categoryInsertFormRef'].resetFields()
     },
     // 删除分组事件回调
     categoryDeleteEventFunction(data) {
@@ -178,7 +182,6 @@ export default {
             type: 'success'
           })
         })
-      this.$refs['categoryInsertFormRef'].resetFields()
     }
   }
 }
