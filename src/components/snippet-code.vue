@@ -26,13 +26,14 @@
     <el-drawer
       title='添加Snippet'
       :visible.sync='isDrawer'
+      @close='dialogCloseEventFunction'
       @open='openInsertDrawerEventFunction'>
       <div class='snippet-drawer-box'>
-        <el-form :model='snippetFrom' class='snippet-drawer-box-form'>
-          <el-form-item label='标题：' :label-width='formLabelWidth'>
+        <el-form :model='snippetFrom' class='snippet-drawer-box-form' ref='snippetFormRef'>
+          <el-form-item label='标题：' :label-width='formLabelWidth' prop='title'>
             <el-input placeholder='请输入标题' v-model='snippetFrom.title'></el-input>
           </el-form-item>
-          <el-form-item label='分组：' :label-width='formLabelWidth'>
+          <el-form-item label='分组：' :label-width='formLabelWidth' prop='category'>
             <el-cascader
               v-model='snippetFrom.category'
               :options='categories'
@@ -91,6 +92,9 @@ export default {
   },
 
   methods: {
+    dialogCloseEventFunction(){
+      this.$refs['snippetFormRef'].resetFields()
+    },
     // 获取到snippet的回调
     snippetGetCallback(code) {
       this.code = code
