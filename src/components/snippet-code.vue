@@ -135,7 +135,7 @@ export default {
 
   .snippet-expand {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     padding: 3px 15px;
     background-color: #4d4d4d;
   }

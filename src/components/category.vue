@@ -14,27 +14,28 @@
       :expand-on-click-node='false'
       ref='tree'>
     <span class='custom-tree-node' slot-scope='{ node,data }'>
-          <el-tag v-if='data.snippet' class='el-icon-tickets' size='small' effect='plain'>
-            <span>{{ node.label }}</span>
-          </el-tag>
-          <div v-else class='category-node '>
-            <i class='el-icon-folder category-site '>
+          <div class='category-node '>
+            <el-tag v-if='data.snippet' class='el-icon-tickets' size='small' effect='plain'>
+              <span>{{ node.label }}</span>
+            </el-tag>
+            <i v-else class='el-icon-folder category-site '>
               <span>{{ node.label }}</span>
             </i>
             <span class='tree-btn'>
               <el-button
+                v-if='!data.snippet'
                 type='text'
-                @click='categoryInsertDialogEventFunction(data)'
+                @click='data.snippet? snippetInsertDialogEventFunction(data) : categoryInsertDialogEventFunction(data)'
                 size='mini'>
                 新增
               </el-button>
               <el-button
                 type='text'
-                @click='categoryDeleteEventFunction(data)'
+                @click='data.snippet? snippetDeleteEventFunction(data) : categoryDeleteEventFunction(data)'
                 size='mini'>
                 删除
               </el-button>
-            </span>
+           </span>
           </div>
       </span>
     </el-tree>
@@ -103,6 +104,7 @@ export default {
       this.getCategoryMenus()
       this.getCategory()
     },
+    // dialog关闭刷新form
     categoryInsertDialogCloseEventFunction() {
       this.$refs['categoryInsertFormRef'].resetFields()
     },
@@ -201,6 +203,10 @@ export default {
     .custom-tree-node {
       width: 100%;
 
+      .tree-btn {
+        margin-right: 5px;
+      }
+
       span {
         margin-left: 5px;
       }
@@ -212,10 +218,6 @@ export default {
         .category-site {
           display: flex;
           align-items: center;
-        }
-
-        .tree-btn {
-          margin-right: 5px;
         }
       }
     }
