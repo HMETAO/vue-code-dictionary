@@ -6,3 +6,11 @@ export function getSnippet(id) {
     method: 'get'
   })
 }
+
+export function insertSnippet(data) {
+  return request({
+    url: `/api/v1/snippet`,
+    method: 'post',
+    data
+  })
+}

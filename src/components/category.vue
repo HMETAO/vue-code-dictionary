@@ -66,7 +66,7 @@
 <script>
 import { getCategoryMenus, insertCategory, deleteCategory } from '@/api/category'
 import { getSnippet } from '@/api/snippet'
-import { SNIPPET_GET_EVENT } from '@/constants/eventConstants'
+import { CATEGORY_MENUS_REFRESH_EVENT, SNIPPET_GET_EVENT } from '@/constants/eventConstants'
 
 export default {
   name: 'category',
@@ -92,6 +92,12 @@ export default {
   },
   created() {
     this.init()
+  },
+  mounted() {
+    this.$bus.$on(CATEGORY_MENUS_REFRESH_EVENT, this.getCategoryMenus)
+  },
+  destroyed() {
+    this.$bus.$off(CATEGORY_MENUS_REFRESH_EVENT)
   },
   watch: {
     categorySearch(val) {

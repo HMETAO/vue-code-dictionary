@@ -12,12 +12,11 @@
                      @click='saveSnippetEventFunction'></el-button>
         </el-tooltip>
       </div>
-
     </div>
     <prism-editor :tabSize='4'
                   @blur='editorBlur'
                   class='my-editor'
-                  v-model='code.snippet'
+                  v-model='snippetFrom.snippet'
                   :highlight='highlighter'
                   line-numbers></prism-editor>
 
@@ -33,16 +32,16 @@
           <el-form-item label='标题：' :label-width='formLabelWidth' prop='title'>
             <el-input placeholder='请输入标题' v-model='snippetFrom.title'></el-input>
           </el-form-item>
-          <el-form-item label='分组：' :label-width='formLabelWidth' prop='category'>
+          <el-form-item label='分组：' :label-width='formLabelWidth' prop='categoryId'>
             <el-cascader
-              v-model='snippetFrom.category'
+              v-model='snippetFrom.categoryId'
               :options='categories'
               :props='categoryProps'
             ></el-cascader>
           </el-form-item>
         </el-form>
         <div class='snippet-drawer-box-button'>
-          <el-button type='primary'>确 定</el-button>
+          <el-button type='primary' @click='snippetInsertEventFunction'>确 定</el-button>
           <el-button>取 消</el-button>
         </div>
       </div>
@@ -59,9 +58,11 @@ import 'prismjs/components/prism-javascript'
 import 'prismjs/themes/prism-tomorrow.css'
 
 
-import { SNIPPET_GET_EVENT } from '@/constants/eventConstants'
+import { CATEGORY_MENUS_REFRESH_EVENT, SNIPPET_GET_EVENT } from '@/constants/eventConstants'
 import { BASE_SNIPPET } from '@/constants/baseConstants'
 import { getCategoryMenus } from '@/api/category'
+import { insertSnippet } from '@/api/snippet'
+
 
 export default {
   name: 'snippet-code',
@@ -70,12 +71,11 @@ export default {
   },
   data() {
     return {
-      code: {
-        snippet: BASE_SNIPPET
-      },
       isDrawer: false,
       formLabelWidth: '80px',
-      snippetFrom: {},
+      snippetFrom: {
+        snippet: BASE_SNIPPET
+      },
       categories: [],
       categoryProps: {
         value: 'id',
@@ -90,14 +90,32 @@ export default {
   destroyed() {
     this.$bus.$off(SNIPPET_GET_EVENT)
   },
-
   methods: {
-    dialogCloseEventFunction(){
+    // snippet插入事件回调
+    snippetInsertEventFunction() {
+      insertSnippet(this.snippetFrom)
+        .then(() => {
+          this.$message({
+            type: 'success',
+            message: '插入成功!'
+          })
+          // 触发菜单刷新事件
+          this.$bus.$emit(CATEGORY_MENUS_REFRESH_EVENT)
+        }).catch((err) => {
+        this.$message({
+          type: 'error',
+          message: '插入失败：' + err
+        })
+      })
+      this.isDrawer = false
+    },
+    // dialog关闭回调
+    dialogCloseEventFunction() {
       this.$refs['snippetFormRef'].resetFields()
     },
-    // 获取到snippet的回调
+    // 获取到snippet的回调 (category点击触发回调 )
     snippetGetCallback(code) {
-      this.code = code
+      this.snippetFrom = code
     },
     // 高亮方法
     highlighter(snippet) {
@@ -106,7 +124,7 @@ export default {
     // 返回插入snippet面板回调
     backSnippetPageEventFunction() {
       // 初始化编辑器
-      this.code = { snippet: BASE_SNIPPET }
+      this.snippetFrom = { snippet: BASE_SNIPPET }
     },
     // 打开插入snippet的Drawer回调
     openInsertDrawerEventFunction() {
@@ -116,7 +134,7 @@ export default {
     },
     // 保存
     saveSnippetEventFunction() {
-      if (!this.code.id) {
+      if (!this.snippetFrom.id) {
         console.log('insert')
         // 弹出drawer
         this.isDrawer = true
@@ -125,7 +143,7 @@ export default {
       }
     },
     editorBlur() {
-      console.log(this.code)
+      console.log(this.snippetFrom)
     }
   }
 }
