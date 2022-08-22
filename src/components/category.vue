@@ -65,7 +65,7 @@
 
 <script>
 import { getCategoryMenus, insertCategory, deleteCategory } from '@/api/category'
-import { getSnippet } from '@/api/snippet'
+import { deleteSnippet, getSnippet } from '@/api/snippet'
 import { CATEGORY_MENUS_REFRESH_EVENT, SNIPPET_GET_EVENT } from '@/constants/eventConstants'
 
 export default {
@@ -110,33 +110,41 @@ export default {
       this.getCategoryMenus()
       this.getCategory()
     },
-    // dialog关闭刷新form
-    categoryInsertDialogCloseEventFunction() {
-      this.$refs['categoryInsertFormRef'].resetFields()
-    },
-    // 删除分组事件回调
-    categoryDeleteEventFunction(data) {
-      this.$confirm('此操作将永久删除 "' + data.label + '" ,该分组下Snippet转移至通用分组, 是否继续?', '提示', {
+    // 删除信息模板
+    deleteMessageTemplate(message, deleteFunction, functionData) {
+      this.$confirm(message, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        deleteCategory(data.id)
-          .then(() => {
-            this.$message({
-              type: 'success',
-              message: '删除成功!'
-            })
-            // 刷新category菜单
-            this.getCategoryMenus()
+        deleteFunction(functionData).then(() => {
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
           })
-          .catch((err) => {
-            this.$message({
-              type: 'error',
-              message: '删除失败：' + err
-            })
+          // 刷新category菜单
+          this.getCategoryMenus()
+        }).catch((err) => {
+          this.$message({
+            type: 'error',
+            message: '删除失败：' + err
           })
+        })
       })
+    },
+    // 删除snippet事件回调
+    snippetDeleteEventFunction(data) {
+      this.deleteMessageTemplate('此操作将永久删除 "' + data.label + '" , 是否继续?',
+        deleteSnippet, data.id.replaceAll('sn-', ''))
+    },
+    // 删除分组事件回调
+    categoryDeleteEventFunction(data) {
+      this.deleteMessageTemplate('此操作将永久删除 "' + data.label + '" ,该分组下Snippet转移至通用分组, 是否继续?',
+        deleteCategory, data.id)
+    },
+    // dialog关闭刷新form
+    categoryInsertDialogCloseEventFunction() {
+      this.$refs['categoryInsertFormRef'].resetFields()
     },
     // 获取分类列表（包括snippet）
     getCategoryMenus() {
@@ -221,6 +229,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
+
         .category-site {
           display: flex;
           align-items: center;

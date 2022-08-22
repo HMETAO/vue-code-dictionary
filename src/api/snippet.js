@@ -14,3 +14,10 @@ export function insertSnippet(data) {
     data
   })
 }
+
+export function deleteSnippet(snippetId) {
+  return request({
+    url: `/api/v1/snippet/` + snippetId,
+    method: 'delete'
+  })
+}
