@@ -25,7 +25,7 @@
               <el-button
                 v-if='!data.snippet'
                 type='text'
-                @click='data.snippet? snippetInsertDialogEventFunction(data) : categoryInsertDialogEventFunction(data)'
+                @click='categoryInsertDialogEventFunction(data)'
                 size='mini'>
                 新增
               </el-button>
@@ -220,7 +220,7 @@ export default {
       .category-node {
         display: flex;
         justify-content: space-between;
-
+        align-items: center;
         .category-site {
           display: flex;
           align-items: center;
