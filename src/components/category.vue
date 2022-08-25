@@ -67,6 +67,7 @@
 import { getCategoryMenus, insertCategory, deleteCategory } from '@/api/category'
 import { deleteSnippet, getSnippet } from '@/api/snippet'
 import { CATEGORY_MENUS_REFRESH_EVENT, SNIPPET_GET_EVENT } from '@/constants/eventConstants'
+import { errorMessage, successMessage } from '@/utils/baseMessage'
 
 export default {
   name: 'category',
@@ -118,17 +119,11 @@ export default {
         type: 'warning'
       }).then(() => {
         deleteFunction(functionData).then(() => {
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          })
+          successMessage(this, '删除成功!')
           // 刷新category菜单
           this.getCategoryMenus()
         }).catch((err) => {
-          this.$message({
-            type: 'error',
-            message: '删除失败：' + err
-          })
+          errorMessage(this, '删除失败：' + err)
         })
       })
     },
@@ -192,11 +187,7 @@ export default {
           // 刷新菜单
           this.getCategoryMenus()
           // 弹出提示消息
-          this.$message({
-            showClose: true,
-            message: '添加成功',
-            type: 'success'
-          })
+          successMessage(this, '添加成功')
         })
     }
   }

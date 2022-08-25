@@ -14,7 +14,7 @@
       </div>
     </div>
     <prism-editor :tabSize='4'
-                  @blur='editorBlur'
+                  @blur='codeEditorBlurEventFunction'
                   class='my-editor'
                   v-model='snippetFrom.snippet'
                   :highlight='highlighter'
@@ -42,7 +42,7 @@
         </el-form>
         <div class='snippet-drawer-box-button'>
           <el-button type='primary' @click='snippetInsertEventFunction'>确 定</el-button>
-          <el-button>取 消</el-button>
+          <el-button @click='()=>{this.isDrawer = false}'>取 消</el-button>
         </div>
       </div>
     </el-drawer>
@@ -61,7 +61,8 @@ import 'prismjs/themes/prism-tomorrow.css'
 import { CATEGORY_MENUS_REFRESH_EVENT, SNIPPET_GET_EVENT } from '@/constants/eventConstants'
 import { BASE_SNIPPET } from '@/constants/baseConstants'
 import { getCategoryMenus } from '@/api/category'
-import { insertSnippet } from '@/api/snippet'
+import { insertSnippet, updateSnippet } from '@/api/snippet'
+import { errorMessage, successMessage } from '@/utils/baseMessage'
 
 
 export default {
@@ -95,17 +96,11 @@ export default {
     snippetInsertEventFunction() {
       insertSnippet(this.snippetFrom)
         .then(() => {
-          this.$message({
-            type: 'success',
-            message: '插入成功!'
-          })
+          successMessage(this, '插入成功!')
           // 触发菜单刷新事件
           this.$bus.$emit(CATEGORY_MENUS_REFRESH_EVENT)
         }).catch((err) => {
-        this.$message({
-          type: 'error',
-          message: '插入失败：' + err
-        })
+        errorMessage(this, '插入失败：' + err)
       })
       this.isDrawer = false
     },
@@ -135,15 +130,23 @@ export default {
     // 保存
     saveSnippetEventFunction() {
       if (!this.snippetFrom.id) {
-        console.log('insert')
         // 弹出drawer
         this.isDrawer = true
       } else {
-        console.log('update')
+        // 更新操作
+        updateSnippet(this.snippetFrom).then(() => {
+          successMessage(this, '更新成功!')
+        })
       }
     },
-    editorBlur() {
-      console.log(this.snippetFrom)
+    // 代码编辑器失焦更新
+    codeEditorBlurEventFunction() {
+      if (this.snippetFrom.id) {
+        // 更新操作
+        updateSnippet(this.snippetFrom).then(() => {
+          successMessage(this, '更新成功!')
+        })
+      }
     }
   }
 }

@@ -21,3 +21,11 @@ export function deleteSnippet(snippetId) {
     method: 'delete'
   })
 }
+
+export function updateSnippet(data) {
+  return request({
+    url: `/api/v1/snippet`,
+    method: 'put',
+    data
+  })
+}
