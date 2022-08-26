@@ -112,7 +112,7 @@ export default {
       this.getCategory()
     },
     // 删除信息模板
-    deleteMessageTemplate(message, deleteFunction, functionData) {
+    deleteMessageTemplate(message, deleteFunction, functionData, deleteItemId) {
       this.$confirm(message, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -130,12 +130,12 @@ export default {
     // 删除snippet事件回调
     snippetDeleteEventFunction(data) {
       this.deleteMessageTemplate('此操作将永久删除 "' + data.label + '" , 是否继续?',
-        deleteSnippet, data.id.replaceAll('sn-', ''))
+        deleteSnippet, data.id.replaceAll('sn-', ''), data.id)
     },
     // 删除分组事件回调
     categoryDeleteEventFunction(data) {
       this.deleteMessageTemplate('此操作将永久删除 "' + data.label + '" ,该分组下Snippet转移至通用分组, 是否继续?',
-        deleteCategory, data.id)
+        deleteCategory, data.id, data.id)
     },
     // dialog关闭刷新form
     categoryInsertDialogCloseEventFunction() {
