@@ -20,7 +20,7 @@ const routes = [
     component: () => import('@/view/Home'),
     children: [
       { path: '/snippet', component: () => import ('@/components/snippet'), meta: { title: '片段' } },
-      { path: '/tool', component: () => import ('@/components/snippet'), meta: { title: '工具' } },
+      { path: '/tool', component: () => import ('@/components/tool'), meta: { title: '工具' } },
       { path: '/other', component: () => import ('@/components/snippet'), meta: { title: '其他' } }
     ],
     meta: { title: '首页' }

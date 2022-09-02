@@ -40,7 +40,7 @@ export default {
 
   .el-main {
     height: 100%;
-    padding: 0;
+    padding: 6px;
     background-color: #f4f4f4;
   }
 }
