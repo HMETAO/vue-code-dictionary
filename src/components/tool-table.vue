@@ -23,7 +23,7 @@
       <el-table-column
         align='center'
         prop='toolSize'
-        label='工具大小'
+        label='工具大小 (kb)'
       >
       </el-table-column>
       <el-table-column
@@ -48,6 +48,7 @@
     </el-pagination>
     <el-dialog
       title='上传tool'
+      width='30%'
       :visible.sync='uploadDialogVisible'
       @close='uploadDialogHandleCloseEventFunction'>
       <el-upload
