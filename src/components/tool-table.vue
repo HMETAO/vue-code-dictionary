@@ -2,12 +2,17 @@
   <div class='tool-table-box'>
     <div class='tool-table-header'>
       <el-button type='primary' plain round size='small' @click='()=>{uploadDialogVisible = true}'>上传文件</el-button>
+      <el-button type='primary' plain round size='small' @click='downloadToolsEventFunction'>批量下载</el-button>
     </div>
     <el-table
       border
       :data='tools'
       highlight-current-row
+      @selection-change='toolSelectEventFunction'
       style='width: 100%'>
+      <el-table-column
+        type='selection'>
+      </el-table-column>
       <el-table-column
         align='center'
         prop='toolName'
@@ -69,7 +74,7 @@
 </template>
 
 <script>
-import { getTools, upload } from '@/api/tool'
+import { downloadTools, getTools, upload } from '@/api/tool'
 import { errorMessage, successMessage } from '@/utils/baseMessage'
 
 export default {
@@ -82,7 +87,8 @@ export default {
         total: 0
       },
       uploadDialogVisible: false,
-      tools: []
+      tools: [],
+      selectionToolIds: []
     }
   },
   created() {
@@ -92,6 +98,25 @@ export default {
     init() {
       this.getTools()
     },
+    // 复选框选取回调
+    toolSelectEventFunction(selection) {
+      this.selectionToolIds = selection.map(selectRow => {
+        return selectRow.id
+      })
+    },
+    // 批量下载tools回调
+    downloadToolsEventFunction() {
+      downloadTools({ ids: this.selectionToolIds })
+        .then(res => {
+          let blob = new Blob([res], { type: 'application/zip;charset=UTF-8' }) // 为blob设置文件类型
+          let url = window.URL.createObjectURL(blob) // 创建一个临时的url指向blob对象
+          let a = document.createElement('a')
+          a.href = url
+          a.click()
+          // 释放这个临时的对象url
+          window.URL.revokeObjectURL(url)
+        })
+    },
     // 关闭对话框回调
     uploadDialogHandleCloseEventFunction() {
       this.$refs.uploadRef.clearFiles()
@@ -100,7 +125,6 @@ export default {
     // 确认上传回调函数
     uploadRequestEventFunction() {
       let { uploadFiles } = this.$refs.uploadRef
-      console.log(uploadFiles)
       let form = new FormData()
       // 文件对象
       uploadFiles.map(file => form.append('files', file.raw))
