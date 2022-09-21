@@ -1,7 +1,7 @@
 <template>
   <div class='tool-table-box'>
     <div class='tool-table-header'>
-      <el-button type='primary' plain round size='small' @click='()=>{uploadDialogVisible = true}'>上传文件</el-button>
+      <el-button type='primary' plain round size='small' @click='()=>{uploadDialogVisible = true}'>上传工具</el-button>
       <el-button type='primary' plain round size='small' @click='downloadToolsEventFunction'>批量下载</el-button>
     </div>
     <el-table
@@ -40,6 +40,10 @@
       <el-table-column
         align='center'
         label='操作'>
+        <template  v-slot='scope'>
+          <el-button type='primary' size='small' @click='downloadOneToolEventFunction(scope.row)'>下载</el-button>
+          <el-button type='danger' size='small'>删除</el-button>
+        </template>
       </el-table-column>
     </el-table>
     <el-pagination
@@ -97,6 +101,10 @@ export default {
   methods: {
     init() {
       this.getTools()
+    },
+    // 下载单个tool点击回调
+    downloadOneToolEventFunction(row) {
+      location.href = row.url
     },
     // 复选框选取回调
     toolSelectEventFunction(selection) {
