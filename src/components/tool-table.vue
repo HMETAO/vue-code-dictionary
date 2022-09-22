@@ -40,9 +40,9 @@
       <el-table-column
         align='center'
         label='操作'>
-        <template  v-slot='scope'>
+        <template v-slot='scope'>
           <el-button type='primary' size='small' @click='downloadOneToolEventFunction(scope.row)'>下载</el-button>
-          <el-button type='danger' size='small'>删除</el-button>
+          <el-button type='danger' size='small' @click='deleteToolEventFunction(scope.row)'>删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import { downloadTools, getTools, upload } from '@/api/tool'
+import { deleteTool, downloadTools, getTools, upload } from '@/api/tool'
 import { errorMessage, successMessage } from '@/utils/baseMessage'
 
 export default {
@@ -129,6 +129,15 @@ export default {
     uploadDialogHandleCloseEventFunction() {
       this.$refs.uploadRef.clearFiles()
       this.getTools()
+    },
+    // 删除单个tool回调
+    deleteToolEventFunction(row) {
+      deleteTool(row.id)
+        .then(res => {
+          this.tools = this.tools.filter(item => {
+            return item.id !== row.id
+          })
+        })
     },
     // 确认上传回调函数
     uploadRequestEventFunction() {

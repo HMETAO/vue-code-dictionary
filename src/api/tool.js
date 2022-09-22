@@ -9,6 +9,13 @@ export function getTools(data) {
   })
 }
 
+export function deleteTool(id) {
+  return request({
+    url: '/api/v1/tool/' + id,
+    method: 'delete'
+  })
+}
+
 export function upload(data) {
   return request({
     url: '/api/v1/tool/upload',
