@@ -23,8 +23,7 @@ export function upload(data) {
     data,
     headers: {
       'Content-type': 'multipart/form-data'
-    },
-    timeout: 60000
+    }
   })
 }
 
@@ -36,7 +35,6 @@ export function downloadTools(data) {
     paramsSerializer: params => {
       return qs.stringify(params, { indices: false })
     },
-    timeout: 180000,
     responseType: 'blob'
   })
 }
