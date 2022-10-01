@@ -9,12 +9,6 @@ pipeline {
             }
         }
 
-        stage('buildCode') {
-            steps {
-                echo 'buildCode'
-                sh 'npm run build '
-            }
-        }
         stage('buildDockerImages & pullDockerImages') {
             steps {
                 echo 'buildDockerImages'
