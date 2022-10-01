@@ -1,6 +1,5 @@
 # node镜像
-FROM node:latest as build-stage
-
+FROM node:12.22 as build-stage
 RUN echo "-------------------- web environment configuration --------------------"
 
 # 指定接下来的工作路径为/app  - 类似于cd命令
