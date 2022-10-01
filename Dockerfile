@@ -7,8 +7,6 @@ WORKDIR /app
 # 拷贝前端项目 当前目录下的所有文件到app目录下(./指当前所有的代码路径 .指上一步cd到app的路径)
 COPY ./ .
 
-# 设置淘宝npm镜像
-#RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
 # 安装依赖
 RUN npm install
 
@@ -23,7 +21,7 @@ FROM nginx:1.15.3-alpine as production-stage
 RUN rm /etc/nginx/conf.d/default.conf
 RUN rm /etc/nginx/nginx.conf
 # 把主机的nginx.conf文件复制到nginx容器的/etc/nginx文件夹下
-COPY ./nginx.conf /etc/nginx/
+COPY nginx.conf /etc/nginx/
 # 拷贝前端vue项目打包后生成的文件到nginx下运行
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 
