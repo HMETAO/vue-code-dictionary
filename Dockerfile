@@ -14,7 +14,7 @@ RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
 RUN cnpm install
 
 # 打包 - 目的：丢到nginx下跑
-RUN cnpm run build:prod
+RUN npm run build
 
 # ======================== 上：npm打包  下：nginx运行 ========================
 # nginx镜像
