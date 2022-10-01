@@ -36,7 +36,7 @@ export function downloadTools(data) {
     paramsSerializer: params => {
       return qs.stringify(params, { indices: false })
     },
-    timeout: 10000,
+    timeout: 180000,
     responseType: 'blob'
   })
 }
