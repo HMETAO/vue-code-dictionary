@@ -4,6 +4,7 @@ import router from './router'
 import './assets/css/reset.css'
 import './assets/css/globel.css'
 import 'element-ui/lib/theme-chalk/index.css'
+import './assets/font/iconfont.css'
 import Element from 'element-ui'
 
 Vue.use(Element)
