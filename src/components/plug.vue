@@ -57,10 +57,10 @@ export default {
       sshDialogFormVisible: false,
       formLabelWidth: '100px',
       sshForm: {
-        username: '',
-        password: '',
+        username: 'root',
+        password: 'lwt2002.lai',
         port: '22',
-        host: ''
+        host: '47.98.249.34'
       }
     }
   },
