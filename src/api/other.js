@@ -9,3 +9,10 @@ export function githubTrend(data) {
 }
 
 
+export function ssh(data) {
+  return request({
+    url: '/api/v1/other/ssh',
+    method: 'post',
+    data
+  })
+}

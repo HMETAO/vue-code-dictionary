@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "3205878",
+      "name": "SSH密钥",
+      "font_class": "SSHmiyue",
+      "unicode": "e7b6",
+      "unicode_decimal": 59318
+    },
+    {
+      "icon_id": "320047",
+      "name": "chart",
+      "font_class": "chart",
+      "unicode": "e63e",
+      "unicode_decimal": 58942
+    },
+    {
+      "icon_id": "32144376",
+      "name": "quick-copy",
+      "font_class": "quick-copy",
+      "unicode": "e886",
+      "unicode_decimal": 59526
+    },
+    {
       "icon_id": "1261751",
       "name": "github-square",
       "font_class": "github-square",

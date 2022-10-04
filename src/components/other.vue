@@ -1,5 +1,6 @@
 <template>
   <div class='other-box'>
+    <plug></plug>
     <github-trend></github-trend>
   </div>
 
@@ -7,11 +8,13 @@
 
 <script>
 import githubTrend from '@/components/github-trend'
+import plug from '@/components/plug'
 
 export default {
   name: 'other',
   components: {
-    githubTrend
+    githubTrend,
+    plug
   }
 }
 </script>

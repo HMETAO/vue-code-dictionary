@@ -135,8 +135,7 @@ export default {
       }
     }
 
-    .header-other {
-    }
+
   }
 
   .github-main {
