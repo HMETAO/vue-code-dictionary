@@ -58,9 +58,9 @@ export default {
       formLabelWidth: '100px',
       sshForm: {
         username: 'root',
-        password: 'lwt2002.lai',
+        password: '',
         port: '22',
-        host: '47.98.249.34'
+        host: ''
       }
     }
   },
