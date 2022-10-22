@@ -32,8 +32,8 @@
     </el-container>
     <!--json格式化Dialog-->
     <el-drawer title='json格式化' direction='ltr' :visible.sync='jsonInfo.jsonDialogVisible'>
-      <div class='router'>
-        <div class='drawer-body'>
+      <div class='json-box'>
+        <div class='json-box-body'>
           <b-code-editor ref='editor' v-model='jsonInfo.jsonData' :indent-unit='4'
                          :auto-format='true' height='100%' />
         </div>
@@ -102,13 +102,13 @@ export default {
 </script>
 
 <style scoped lang='less'>
-.router {
+.json-box {
   display: flex;
   height: 100%;
   flex-direction: column;
 
-  .drawer-body {
-    flex: 1;
+  .json-box-body {
+    height: calc(100vh - 117px);
     overflow: auto;
 
     /deep/ .CodeMirror {
