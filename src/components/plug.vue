@@ -5,7 +5,6 @@
         <i class='iconfont'>&#xe63e;</i>图表
       </el-header>
       <el-main class='chart-main'>
-        1
       </el-main>
     </el-container>
     <el-container class='quick-box'>
@@ -20,10 +19,29 @@
               </el-button>
             </el-tooltip>
           </div>
+          <div class='quick-item'>
+            <el-tooltip effect='dark' content='json格式化' placement='top-start'>
+              <el-button class='iconfont' type='warning' circle @click='()=>{this.jsonInfo.jsonDialogVisible=true}'>
+                &#xea43;
+              </el-button>
+            </el-tooltip>
+          </div>
+
         </div>
       </el-main>
     </el-container>
+    <!--json格式化Dialog-->
+    <el-drawer title='json格式化' direction='ltr' :visible.sync='jsonInfo.jsonDialogVisible'>
+      <div class='router'>
+        <div class='drawer-body'>
+          <b-code-editor ref='editor' v-model='jsonInfo.jsonData' :indent-unit='4'
+                         :auto-format='true' height='100%' />
+        </div>
+        <el-button type='primary' @click='()=>{this.$refs["editor"].formatCode()}'>格式化Json</el-button>
+      </div>
+    </el-drawer>
 
+    <!--sshDialog-->
     <el-dialog title='ssh配置' :visible.sync='sshDialogFormVisible' width='450px'>
       <el-form :model='sshForm'>
         <el-form-item label='host' :label-width='formLabelWidth'>
@@ -54,6 +72,11 @@ export default {
   name: 'plug',
   data() {
     return {
+      jsonInfo: {
+        hasJsonFlag: true,  // json是否验证通过
+        jsonDialogVisible: false,
+        jsonData: ''
+      },
       sshDialogFormVisible: false,
       formLabelWidth: '100px',
       sshForm: {
@@ -79,6 +102,23 @@ export default {
 </script>
 
 <style scoped lang='less'>
+.router {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+
+  .drawer-body {
+    flex: 1;
+    overflow: auto;
+
+    /deep/ .CodeMirror {
+      height: 100%;
+    }
+  }
+
+}
+
+
 .el-container {
   height: 100%;
   margin-right: 5px;
@@ -107,14 +147,18 @@ export default {
     margin-top: 10px;
 
     .quick-main {
-      display: flex;
 
       .quick-body {
+        display: flex;
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: space-around;
+
         .quick-item {
           display: flex;
-          flex-wrap: wrap;
-          flex-direction: column;
           align-items: center;
+          width: 50px;
+          height: 50px;
 
           .el-button {
             font-size: 24px;

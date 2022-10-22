@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3616280 */
-  src: url('iconfont.woff2?t=1664848085324') format('woff2'),
-       url('iconfont.woff?t=1664848085324') format('woff'),
-       url('iconfont.ttf?t=1664848085324') format('truetype');
+  src: url('iconfont.woff2?t=1666435845913') format('woff2'),
+       url('iconfont.woff?t=1666435845913') format('woff'),
+       url('iconfont.ttf?t=1666435845913') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,18 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-json-full:before {
+  content: "\ea42";
+}
+
+.icon-json1:before {
+  content: "\ea43";
+}
+
+.icon-json:before {
+  content: "\e60e";
 }
 
 .icon-SSHmiyue:before {

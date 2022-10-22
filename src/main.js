@@ -6,9 +6,9 @@ import './assets/css/globel.css'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/font/iconfont.css'
 import Element from 'element-ui'
-
+import CodeEditor from 'bin-code-editor';
+Vue.use(CodeEditor);
 Vue.use(Element)
-
 Vue.config.productionTip = false
 
 new Vue({
