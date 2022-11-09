@@ -6,7 +6,7 @@ import 'xterm/css/xterm.css'
 import { Terminal } from 'xterm'
 import { FitAddon } from 'xterm-addon-fit'
 import { AttachAddon } from 'xterm-addon-attach'
-import { errorMessage, successMessage } from '@/utils/baseMessage'
+import { errorMessage, infoMessage, successMessage } from '@/utils/baseMessage'
 
 export default {
   name: 'Xterm',
@@ -76,13 +76,14 @@ export default {
       }
     },
     socketOnClose() {
-      this.socket.onclose = () => {
-        successMessage(this, 'socket 关闭')
+      this.socket.onclose = (closeMessage) => {
+        infoMessage(this, 'socket 关闭 ' + closeMessage.reason)
         this.backOther()
       }
     },
     socketOnError() {
-      this.socket.onerror = () => {
+      this.socket.onerror = (err) => {
+        console.log(err)
         errorMessage(this, 'socket 链接失败')
         this.backOther()
       }
