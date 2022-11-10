@@ -26,10 +26,18 @@
               </el-button>
             </el-tooltip>
           </div>
-
+          <div class='quick-item'>
+            <el-tooltip effect='dark' content='2048' placement='top-start'>
+              <el-button class='iconfont' type='warning' circle @click='()=>{this.$router.push("game2048")
+              }'>
+                &#xe63f;
+              </el-button>
+            </el-tooltip>
+          </div>
         </div>
       </el-main>
     </el-container>
+
     <!--json格式化Dialog-->
     <el-drawer title='json格式化' direction='ltr' :visible.sync='jsonInfo.jsonDialogVisible'>
       <div class='json-box'>
@@ -67,11 +75,16 @@
 <script>
 import { ssh } from '@/api/other'
 import { errorMessage } from '@/utils/baseMessage'
+import game2048 from '@/components/game-2048'
 
 export default {
   name: 'plug',
+  components: {
+    game2048
+  },
   data() {
     return {
+      game2048DialogFormVisible: false,
       jsonInfo: {
         hasJsonFlag: true,  // json是否验证通过
         jsonDialogVisible: false,

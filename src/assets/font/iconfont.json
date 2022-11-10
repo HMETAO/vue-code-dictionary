@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "5504318",
+      "name": "games",
+      "font_class": "games",
+      "unicode": "e63f",
+      "unicode_decimal": 58943
+    },
+    {
       "icon_id": "18174834",
       "name": "文件,json",
       "font_class": "json-full",
