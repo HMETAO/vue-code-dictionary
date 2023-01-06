@@ -50,7 +50,7 @@ export default {
     return {
       loginForm: {
         username: 'HMETAO',
-        password: '123456'
+        password: ''
       },
       loginFormRules: {
         username: [
