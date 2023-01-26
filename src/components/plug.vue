@@ -5,6 +5,7 @@
         <i class='iconfont'>&#xe63e;</i>图表
       </el-header>
       <el-main class='chart-main'>
+        <calendar></calendar>
       </el-main>
     </el-container>
     <el-container class='quick-box'>
@@ -76,11 +77,13 @@
 import { ssh } from '@/api/other'
 import { errorMessage } from '@/utils/baseMessage'
 import game2048 from '@/components/game-2048'
+import calendar from '@/components/calendar'
 
 export default {
   name: 'plug',
   components: {
-    game2048
+    game2048,
+    calendar
   },
   data() {
     return {
