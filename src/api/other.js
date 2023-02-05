@@ -16,3 +16,11 @@ export function ssh(data) {
     data
   })
 }
+
+
+export function calendar() {
+  return request({
+    url: '/api/v1/other/calendar',
+    method: 'get'
+  })
+}

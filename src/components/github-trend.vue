@@ -86,7 +86,6 @@ export default {
     githubTrend() {
       githubTrend(this.trendQuery)
         .then(res => {
-          console.log(res)
           this.trends = res.data
         }).catch(err => {
         errorMessage(this, err)
