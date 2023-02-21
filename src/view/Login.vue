@@ -33,7 +33,6 @@
         <!-- 按钮区域 -->
         <el-form-item class='login-btn'>
           <el-button type='info' @click='()=>{this.registryDialogFormVisible = true}'>注册</el-button>
-          <el-button type='info' @click='resetLoginFormCloseEventFunction()'>重置</el-button>
           <el-button type='primary' @click='login()'>登录</el-button>
         </el-form-item>
       </el-form>
@@ -230,10 +229,6 @@ export default {
         }
       })
 
-    },
-    resetLoginFormCloseEventFunction() {
-      // 刷新表单
-      this.$refs.loginFormRef.resetFields()
     },
     resetRegistryFormCloseEventFunction() {
       this.registryForm.file = undefined
