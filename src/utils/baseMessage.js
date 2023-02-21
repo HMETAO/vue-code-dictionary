@@ -23,3 +23,12 @@ export function infoMessage(_this, msg) {
     duration: 3000
   })
 }
+
+
+export function warningMessage(_this, msg) {
+  _this.$message({
+    type: 'warning',
+    message: msg,
+    duration: 3000
+  })
+}
