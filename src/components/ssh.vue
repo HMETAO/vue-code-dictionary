@@ -13,7 +13,7 @@ export default {
   props: {
     socketURI: {
       type: String,
-      default: process.env.VUE_APP_BASE_SW + '/api/v1/ssh?token=' + document.cookie.substring(document.cookie.indexOf('code-dictionary')).split('=')[1]
+      default: process.env.VUE_APP_BASE_SW + '/api/v1/ssh?token=' + window.localStorage.getItem('token')
     }
   },
   data() {

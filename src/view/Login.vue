@@ -213,6 +213,7 @@ export default {
             // 存储用户信息
             window.localStorage.setItem('userInfo', JSON.stringify(res.data))
             window.localStorage.setItem('isLogin', 'true')
+            window.localStorage.setItem('token', res.data.token)
             // 触发登录事件
             this.$bus.$emit(LOGIN_STATE_EVENT)
             // 跳转home
