@@ -25,7 +25,7 @@ export default {
             ...res.data.map(item => ({
               key: item.key,
               dates: item.dates,
-              bar: {
+              dot: {
                 color: item.color
               },
               popover: {
@@ -33,6 +33,14 @@ export default {
               }
             }))
           ]
+          this.calendarAttr.push({
+            dates: new Date(), highlight: {
+              color: 'purple',
+              fillMode: 'outline'
+            }
+          })
+          console.log(this.calendarAttr)
+
         })
     }
   }
