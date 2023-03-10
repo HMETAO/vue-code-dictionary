@@ -75,7 +75,8 @@ export default {
       isDrawer: false,
       formLabelWidth: '80px',
       snippetFrom: {
-        snippet: BASE_SNIPPET
+        snippet: BASE_SNIPPET,
+        title: undefined
       },
       categories: [],
       categoryProps: {
@@ -102,6 +103,7 @@ export default {
         }).catch((err) => {
         errorMessage(this, '插入失败：' + err)
       })
+      this.$refs['snippetFormRef'].resetFields()
       this.isDrawer = false
     },
     // dialog关闭回调
