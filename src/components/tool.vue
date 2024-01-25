@@ -1,12 +1,17 @@
 <template>
   <el-card class='tool-box'>
-
+    <toolTable></toolTable>
   </el-card>
 </template>
 
 <script>
+import toolTable from '@/components/tool-table'
+
 export default {
-  name: 'tool'
+  name: 'tool',
+  components: {
+    toolTable
+  }
 }
 </script>
 
@@ -15,6 +20,7 @@ export default {
   height: 100%;
 
 }
+
 .el-card {
   border: 0;
 }

@@ -14,3 +14,12 @@ export function logout() {
     method: 'get',
   })
 }
+
+
+export function registry(data) {
+  return request({
+    url: '/api/v1/user/registry',
+    method: 'post',
+    data
+  })
+}

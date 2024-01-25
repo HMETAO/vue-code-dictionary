@@ -4,7 +4,7 @@ import axios from 'axios'
 // create an axios instance
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
-  timeout: 5000, // request timeout
+  timeout: 600 * 1000, // request timeout
   withCredentials: true
 })
 
@@ -37,7 +37,8 @@ service.interceptors.response.use(
     return response.data
   },
   (error) => {
-    return Promise.reject(error.response.data.message)
+    console.log(error)
+    return Promise.reject(error.response ? error.response.data.message : error)
   }
 )
 

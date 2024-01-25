@@ -21,7 +21,9 @@ const routes = [
     children: [
       { path: '/snippet', component: () => import ('@/components/snippet'), meta: { title: '片段' } },
       { path: '/tool', component: () => import ('@/components/tool'), meta: { title: '工具' } },
-      { path: '/other', component: () => import ('@/components/snippet'), meta: { title: '其他' } }
+      { path: '/other', component: () => import ('@/components/other'), meta: { title: '其他' } },
+      { path: '/ssh', component: () => import ('@/components/ssh'), meta: { title: 'ssh' } },
+      { path: '/game2048', component: () => import ('@/components/game-2048'), meta: { title: 'game2048' } }
     ],
     meta: { title: '首页' }
   }
